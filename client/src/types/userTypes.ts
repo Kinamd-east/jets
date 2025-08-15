@@ -61,6 +61,7 @@ export interface User {
   email: string;
   passwordHash: string;
   wallet: Wallet;
+  isSubscribedSeller: boolean;
   productsSold: number;
   productsBought: number;
   achievements: Achievement[];

@@ -44,6 +44,17 @@ const NavigationBar = () => {
     navigate("/profile");
   };
 
+  const handleSubscription = async () => {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/subscribe`, {
+      method: "POST",
+      credentials: "include",
+    });
+    const data = await res.json();
+    if (data.paymentLink) {
+      window.location.href = data.paymentLink; // redirect to payment page
+    }
+  };
+
   return (
     <Navbar className="shadow-md">
       {/* Desktop Navigation */}
@@ -52,13 +63,24 @@ const NavigationBar = () => {
         <NavItems items={navItems} />
         <div className="flex items-center gap-4">
           {user ? (
-            <div>
-              <NavbarButton
-                variant="secondary"
-                onClick={() => navigate("/profile")}
-              >
-                <Plus /> List Product
-              </NavbarButton>
+            <div className="flex flex-row gap-2">
+              {user.isSubscribedSeller ? (
+                <NavbarButton
+                  variant="primary"
+                  onClick={() => navigate("/profile")}
+                  className="flex flex-row items-center"
+                >
+                  <Plus /> List Product
+                </NavbarButton>
+              ) : (
+                <NavbarButton
+                  variant="primary"
+                  onClick={handleSubscription}
+                  className="flex flex-row items-center"
+                >
+                  Become a seller
+                </NavbarButton>
+              )}
               <NavbarButton
                 variant="secondary"
                 onClick={() => navigate("/profile")}

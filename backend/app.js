@@ -9,8 +9,8 @@ const cors = require("cors");
 // const axios = require("axios");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/authRoutes");
-// const notisRoutes = require("./routes/notisRoutes");
-// const walletRoutes = require("./routes/walletRoutes");
+const productRoutes = require("./routes/productRoutes");
+const subscriptionRoutes = require("./routes/subscriptionRoutes");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
@@ -45,8 +45,8 @@ app.use(
 connectDB();
 
 app.use("/auth", authRoutes);
-// app.use("/notifications", notisRoutes);
-// app.use("/wallet", walletRoutes);
+app.use("/products", productRoutes);
+app.use("/", subscriptionRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -47,6 +47,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     productsSold: { type: Number, default: 0 },
+    isSubscribedSeller: { type: Boolean, default: false },
     productsBought: { type: Number, default: 0 },
     achievements: [
       {

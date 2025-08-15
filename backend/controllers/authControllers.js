@@ -25,6 +25,7 @@ const registerUser = async (req, res) => {
       inventory: [],
       achievements: [],
       productsBought: 0,
+      isSubscribedSeller: false,
       productsSold: 0,
       products: [],
       notifications: [],
@@ -89,9 +90,6 @@ const logout = (req, res) => {
 };
 
 const getMe = async (req, res) => {
-  console.dir(req, { depth: null });
-  console.dir(req.sessions, { depth: null });
-  console.dir(req.sessions, { depth: null });
   if (!req.session.userId)
     return res.status(401).json({ message: "Not logged in" });
 
